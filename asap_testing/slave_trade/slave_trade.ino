@@ -1,15 +1,12 @@
 void setup() {
-  Serial.begin(9600);  // Start communication with HC-05 on pins 0 (RX) and 1 (TX)
-  Serial.println("Slave Ready");
+  Serial.begin(9600);  // Ensure baud rate matches HC-05
+  Serial.println("Waiting for data...");
 }
 
 void loop() {
-  if (Serial.available()) {                 // Check if data is available from HC-05
-    String received = Serial.readString();  // Read the incoming data
-    received = received.toInt();
+  if (Serial.available()) {
+    String received = Serial.readString();  // Read incoming character
     Serial.print("Received: ");
-    Serial.println(received);  // Print the received data to Serial Monitor
-  } else {
-    Serial.println("failed");
+    Serial.println(received);       // Print received character
   }
 }

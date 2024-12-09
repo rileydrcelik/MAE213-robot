@@ -18,6 +18,7 @@ void setup() {
 
 int page = 1;
 int pressed = 0;
+int sent = 0;
 
 void loop() {
   lcd.clear();
@@ -30,13 +31,13 @@ void loop() {
   if (((button == LOW) || (page == 1)) && pressed == 0){
     if (y > 600) {
       page += 1;
-      if (page == 3) {
+      if (page == 4) {
         page = 0;
       }
     } else if (y < 400) {
       page -= 1;
       if (page == -1) {
-        page = 2;
+        page = 3;
       }
     }
     switch (page) {
@@ -46,12 +47,16 @@ void loop() {
         lcd.print("<-- Select -->");
         delay(200);
         break;
+      case 3:
+        lcd.print("Water Bottle");
+        delay(200);
+        break;
       case 2:
         lcd.print("Yellow Puck");
         delay(200);
         break;
       case 0:
-        lcd.print("red ball");
+        lcd.print("eraser");
         delay(200);
         break;
     }
@@ -61,16 +66,31 @@ void loop() {
     lcd.setCursor(0, 0);
     lcd.print("Item Selected: ");
     switch (page){
+      case 3:
+        lcd.setCursor(0, 1);
+        lcd.print("water bottle");
+        if(sent == 0){
+          Serial.println(3);
+          sent = 1;
+        }
+        delay(200);
+        break;
       case 2:
         lcd.setCursor(0, 1);
         lcd.print("yellow puck");
-        Serial.println(2);
+        if(sent == 0){
+          Serial.println(4);
+          sent = 1;
+        }
         delay(200);
         break;
       case 0:
         lcd.setCursor(0, 1);
-        lcd.print("red ball");
-        Serial.println(0);
+        lcd.print("eraser");
+        if(sent == 0){
+          Serial.println(2);
+          sent = 1;
+        }
         delay(200);
         break;
     }

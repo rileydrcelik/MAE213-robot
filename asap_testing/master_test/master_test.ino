@@ -1,7 +1,7 @@
 void setup(){
-  Serial.begin(38400);
+  Serial.begin(9600);
 }
 void loop(){
-  Serial.println("Hello from your daddy");
+  Serial.println("Hello ");
   delay(1000);
 }
